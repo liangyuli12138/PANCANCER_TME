@@ -1,0 +1,2 @@
+perl -e 'open IN0,$ARGV[0];while(<IN0>){chomp;@a=split;if(@a<7){next};$x="$a[0]"."$a[2]";$ha{$x}+=$a[-2];$haa{$x}++;$hb{$x}+=$a[-1];$hbb{$x}++};open IN1,$ARGV[1];<IN1>;while(<IN1>){chomp;@a=split(/,/);$n=$ha{$a[0]}/$haa{$a[0]};$m=$hb{$a[0]}/$hbb{$a[0]};$ho{$a[1]}.="$n\t"};for $i(sort {$a<=>$b}keys %ho){print "Group$i\t$ho{$i}\n"}' merge.stat.csv.filter ../immune.cluster.r0.5.obs > immune.cluster.r0.5.antiTumor
+

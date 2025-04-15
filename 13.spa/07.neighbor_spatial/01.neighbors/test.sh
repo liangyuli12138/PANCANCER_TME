@@ -1,0 +1,3 @@
+perl -e 'while(<>){chomp;@a=split;$t="$a[1].$a[0]";$o=`cat spatial_neighbors.sub.global.py`;$o=~s/aaaa/$a[0]/g;$o=~s/bbbb/$t/g;open OUT,">shell/sub.global/$t.py";print OUT "$o";open OUT,">shell/sub.global/$t.sh";print OUT "/jdfssz1/ST_TSCBI/P22Z10200N0433/USER/zhangzhao/software/anaconda3/bin/python $t.py\n"}' sn.list
+perl -e 'while(<>){chomp;@a=split;$t="$a[1].$a[0]";$o=`cat spatial_neighbors.sub.local.py`;$o=~s/aaaa/$a[0]/g;$o=~s/bbbb/$t/g;open OUT,">shell/sub.local/$t.py";print OUT "$o";open OUT,">shell/sub.local/$t.sh";print OUT "/jdfssz1/ST_TSCBI/P22Z10200N0433/USER/zhangzhao/software/anaconda3/bin/python $t.py\n"}' sn.list
+

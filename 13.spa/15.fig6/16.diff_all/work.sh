@@ -1,0 +1,2 @@
+perl -e 'for($i=1;$i<=3;$i++){for($j=1;$j<=3;$j++){if($i==$j){next};print "/hwfssz4/BC_PUB/Software/07.User-defined/03.Animal_Plant/wubin/mamba/bin/python /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/15.fig6/16.diff_all/findmarker.py /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/15.fig6/16.diff_all/pancancer.icar.all.cell.filter.h5ad Lymphoid$i Lymphoid$j /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/15.fig6/16.diff_all/diff/diff.$i.vs.$j.csv\n"}}' > all.sh
+

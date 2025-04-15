@@ -1,0 +1,41 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import os
+
+os.chdir("/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/10.cluster_immune/06.more_celltype_cluster/05.l2m/plot")
+data = pd.read_csv('l2m.stat.merge.csv', index_col=0)
+
+fig, ax = plt.subplots(figsize=(8,5))
+ax = sns.violinplot(data, x='group', y='Lymphoid_percentage', palette='tab10', scale='width',linewidth=0.8, height=1,order=['Lymphoid0','Lymphoid1','Lymphoid2','Lymphoid3','Myeloid4','Myeloid5','Myeloid6','Myeloid7','Myeloid8'])
+sns.stripplot(data, x='group', y='Lymphoid_percentage', jitter=0.2, size=2, alpha=0.8, color='black', order=['Lymphoid0','Lymphoid1','Lymphoid2','Lymphoid3','Myeloid4','Myeloid5','Myeloid6','Myeloid7','Myeloid8'])
+plt.xticks(rotation=45)
+plt.tight_layout() 
+plt.savefig('output.Lymphoid_percentage.png', dpi=300) 
+
+fig, ax = plt.subplots(figsize=(8,5))
+ax = sns.violinplot(data, x='group', y='Myeloid_percentage', palette='tab10', scale='width',linewidth=0.8, height=1,order=['Lymphoid0','Lymphoid1','Lymphoid2','Lymphoid3','Myeloid4','Myeloid5','Myeloid6','Myeloid7','Myeloid8'])
+sns.stripplot(data, x='group', y='Myeloid_percentage', jitter=0.2, size=2, alpha=0.8, color='black', order=['Lymphoid0','Lymphoid1','Lymphoid2','Lymphoid3','Myeloid4','Myeloid5','Myeloid6','Myeloid7','Myeloid8'])
+plt.savefig('output.Myeloid_percentage.png', dpi=300)
+
+fig, ax = plt.subplots(figsize=(8,5))
+ax = sns.violinplot(data, x='group', y='log10_Lym2Mye_ratio', palette='tab10', scale='width',linewidth=0.8, height=1,order=['Lymphoid0','Lymphoid1','Lymphoid2','Lymphoid3','Myeloid4','Myeloid5','Myeloid6','Myeloid7','Myeloid8'])
+sns.stripplot(data, x='group', y='log10_Lym2Mye_ratio',jitter=0.2, size=2, alpha=0.8, color='black', order=['Lymphoid0','Lymphoid1','Lymphoid2','Lymphoid3','Myeloid4','Myeloid5','Myeloid6','Myeloid7','Myeloid8'])
+plt.savefig('output.log10_Lym2Mye_ratio.png', dpi=300)
+
+fig, ax = plt.subplots(figsize=(8,5))
+ax = sns.violinplot(data, x='group', y='density', palette='tab10', scale='width',linewidth=0.8, height=1,order=['Lymphoid0','Lymphoid1','Lymphoid2','Lymphoid3','Myeloid4','Myeloid5','Myeloid6','Myeloid7','Myeloid8'])
+sns.stripplot(data, x='group', y='density',jitter=0.2, size=2, alpha=0.8, color='black', order=['Lymphoid0','Lymphoid1','Lymphoid2','Lymphoid3','Myeloid4','Myeloid5','Myeloid6','Myeloid7','Myeloid8'])
+plt.savefig('output.density.png', dpi=300)
+
+fig, ax = plt.subplots(figsize=(8,5))
+ax = sns.violinplot(data, x='group', y='area', palette='tab10', scale='width',linewidth=0.8, height=1,order=['Lymphoid0','Lymphoid1','Lymphoid2','Lymphoid3','Myeloid4','Myeloid5','Myeloid6','Myeloid7','Myeloid8'])
+ax.set_ylim(0, 1)
+sns.stripplot(data, x='group', y='area',jitter=0.2, size=2, alpha=0.8, color='black', order=['Lymphoid0','Lymphoid1','Lymphoid2','Lymphoid3','Myeloid4','Myeloid5','Myeloid6','Myeloid7','Myeloid8'])
+plt.savefig('output.area.png', dpi=300)
+
+fig, ax = plt.subplots(figsize=(8,5))
+ax = sns.violinplot(data, x='group', y='elongation', palette='tab10', scale='width',linewidth=0.8, height=1,order=['Lymphoid0','Lymphoid1','Lymphoid2','Lymphoid3','Myeloid4','Myeloid5','Myeloid6','Myeloid7','Myeloid8'])
+sns.stripplot(data, x='group', y='elongation',jitter=0.2, size=2, alpha=0.8, color='black', order=['Lymphoid0','Lymphoid1','Lymphoid2','Lymphoid3','Myeloid4','Myeloid5','Myeloid6','Myeloid7','Myeloid8'])
+plt.savefig('output.elongation.png', dpi=300)
+

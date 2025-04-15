@@ -1,0 +1,2 @@
+source /jdfssz1/ST_TSCBI/P22Z10200N0433/USER/liujzh/library/Miniconda3/bin/activate R_env
+/jdfssz1/ST_TSCBI/P22Z10200N0433/USER/liujzh/library/Miniconda3/envs/R_env/bin/Rscript /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/10.cluster_immune/05.cluster_by_gene/data/convert.R /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/10.cluster_immune/05.cluster_by_gene/data/merge_25chip_immune_area.rds seurat anndata merge_25chip_immune_area

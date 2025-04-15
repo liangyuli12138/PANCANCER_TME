@@ -1,0 +1,1 @@
+python /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/15.fig6/15.all.all.diff/findmarker.py /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/15.fig6/15.all.all.diff/pancancer.icar.all.cell.filter.0527.h5ad Myeloid_cDC2 /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/15.fig6/15.all.all.diff/diff/diff.Myeloid_cDC2.csv

@@ -1,0 +1,2 @@
+perl -e 'while(<>){chomp;@a=split;$z="at/$a[0].tls.at";open OUT,">$z";$x="/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/12.TLS_celltype/01.cluster/at/$a[0].tls.at";undef %ha;open IN,$x;while(<IN>){chomp;@c=split(/,/);if(@c<6){next};$ha{$c[2]}="$c[3],$c[4],$c[5]";print OUT "$_\n"};$y="/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/09.cluster_immune/04.plot/at.pla/$a[0].ori.at";open IN,$y;while(<IN>){chomp;s/\"//g;@b=split(/,/);if($b[2]=~/Lymphoid\_Plamsa/ && exists $ha{$b[3]}){print OUT "$b[1],$b[2],$b[3],$ha{$b[3]}\n"}}}' sn.list 
+

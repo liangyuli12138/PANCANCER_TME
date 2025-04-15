@@ -1,0 +1,8 @@
+library(Seurat)
+args<-commandArgs(T)
+x<- as.character(args[1])
+obj <- readRDS(x)
+outpdf <- paste(x,".hist.pdf",sep="")
+pdf(outpdf, w=6, h=6)
+hist(obj@meta.data$nFeature_RNA,xlim=c (200,2000),100)
+while (!is.null(dev.list()))  dev.off()

@@ -1,0 +1,1 @@
+TMPDIR=/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/15.fig6/14.cell_diff/all2/diff_merge/fun /ldfssz1/ST_OCEAN/USER/liaoshangfeng/software/anaconda3/envs/R411/bin/Rscript enrich.kegg.R

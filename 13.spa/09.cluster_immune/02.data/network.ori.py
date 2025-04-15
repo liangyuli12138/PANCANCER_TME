@@ -1,0 +1,184 @@
+import scanpy as sc
+import numpy as np
+import networkx as nx
+from scipy.spatial import KDTree
+import pandas as pd
+from scipy.spatial import ConvexHull
+from shapely.geometry import Polygon, Point
+
+# 读取h5ad文件
+adata = sc.read_h5ad('/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/06.cell2location/01.from_hainan/ori_file/h5ad/data/D01972D1_cellbin.final.celltype.h5ad')
+atlist = pd.read_csv("/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/09.cluster_immune/02.data/at/D01972D1.at",index_col=0)
+adata.obs = adata.obs.join(atlist)
+
+
+# 获取细胞类型、x和y的列名称
+celltype_column = 'region'  # 替换为细胞类型列的名称
+x_column = 'x'  # 替换为x坐标列的名称
+y_column = 'y'  # 替换为y坐标列的名称
+
+# 获取细胞类型、x和y的数据
+celltypes = adata.obs[celltype_column].values
+x_coords = adata.obs[x_column].values
+y_coords = adata.obs[y_column].values
+
+# 构造KDTree来加速邻近点的查找
+points = np.column_stack((x_coords, y_coords))
+kdtree = KDTree(points)
+
+# 创建一个空的无向图来存储cluster
+G = nx.Graph()
+
+# 遍历所有的点
+for i, (celltype, x, y) in enumerate(zip(celltypes, x_coords, y_coords)):
+    if celltype == 'Immune':
+        # 在给定半径内查找相邻点
+        indices = kdtree.query_ball_point([x, y], r=50)
+
+        # 过滤掉自身点
+        indices = [idx for idx in indices if idx != i]
+
+        # 遍历相邻点，添加到cluster
+        for idx in indices:
+            neighbor_celltype = celltypes[idx]
+
+            # 如果相邻点具有相同的细胞类型，连接它们
+            if neighbor_celltype == celltype:
+                G.add_edge(i, idx)
+
+# 获取所有的连通分量（clusters）
+clusters = list(nx.connected_components(G))
+
+# 统计每个cluster内的cell数目
+cluster_sizes = [len(cluster) for cluster in clusters]
+
+filtered_clusters = [cluster for cluster, size in zip(clusters, cluster_sizes) if size > 100]
+
+clusters = filtered_clusters
+
+cluster_sizes = [len(cluster) for cluster in clusters]
+
+# 获取每个cluster的多边形外边界并向外扩张200
+expanded_polygons = []
+original_polygons = []
+for cluster in clusters:
+    # 获取cluster的x和y坐标
+    cluster_coords = points[list(cluster)]
+
+    # 计算cluster的凸包
+    hull = ConvexHull(cluster_coords)
+
+    # 构造cluster的多边形
+    polygon = Polygon(cluster_coords[hull.vertices])
+
+    # 向外扩张100
+    expanded_polygon = polygon.buffer(100)
+
+    expanded_polygons.append(expanded_polygon)
+#    original_polygons.append(polygon)
+
+    original_polygon = polygon.buffer(10)
+    original_polygons.append(original_polygon)
+
+# 将结果写入文件
+output_file = '/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/09.cluster_immune/02.data/output.txt'  # 替换为输出文件的路径和名称
+
+with open(output_file, 'w') as f:
+    for i, (cluster, size, original_polygon, expanded_polygon) in enumerate(zip(clusters, cluster_sizes, original_polygons, expanded_polygons)):
+        # 获取cluster的obs index或第一列id
+        cell_ids = adata.obs.index[list(cluster)]  # 替换为obs的index列或第一列id的名称
+
+        # 获取在扩展范围内的细胞
+        expanded_indices = [idx for idx in list(cluster) if expanded_polygon.contains(Point(points[idx]))]
+        expanded_cell_ids = adata.obs.index[expanded_indices]
+
+        # 获取原多边形内的全部细胞
+        original_indices = [idx for idx in list(cluster) if original_polygon.contains(Point(points[idx]))]
+        original_cell_ids = adata.obs.index[original_indices]
+
+        f.write(f"Cluster {i+1} (Size: {size}): {', '.join(cell_ids)}\n")
+        f.write(f"Cluster {i+1} Original Boundary: {original_polygon}\n")
+        f.write(f"Cluster {i+1} Expanded Boundary: {expanded_polygon}\n")
+#       f.write(f"Cluster_ex {i+1} (Size: {len(expanded_indices)}): {', '.join(expanded_cell_ids)}\n")
+#       f.write(f"Cluster_ori {i+1} (Size: {len(original_indices)}): {', '.join(original_cell_ids)}\n")
+
+
+output_file = '/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/09.cluster_immune/02.data/output.ex.txt'
+with open(output_file, 'w') as f:
+    for i, (cluster, size, original_polygon, expanded_polygon) in enumerate(zip(clusters, cluster_sizes, original_polygons, expanded_polygons)):
+        # 获取cluster的obs index或第一列id
+        cell_ids = []
+        for j in range(len(adata)):
+            cell = adata.obs.index[j]  # 替换为obs的index列或第一列id的名称
+            cell_point = Point(points[j])
+            if expanded_polygon.contains(cell_point):
+                cell_ids.append(cell)
+
+        # 获取在扩展范围内的细胞
+        expanded_indices = [j for j in range(len(adata)) if expanded_polygon.contains(Point(points[j]))]
+        expanded_cell_ids = [adata.obs.index[j] for j in expanded_indices]
+
+        # 获取原多边形内的全部细胞
+        original_indices = [j for j in range(len(adata)) if original_polygon.contains(Point(points[j]))]
+        original_cell_ids = [adata.obs.index[j] for j in original_indices]
+
+        f.write(f"Cluster_ori {i+1} (Size: {len(original_indices)}): {', '.join(original_cell_ids)}\n")
+        f.write(f"Cluster_ex {i+1} (Size: {len(expanded_indices)}): {', '.join(expanded_cell_ids)}\n")
+
+
+##统计细胞类型
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 统计每个Cluster_ori内各种细胞种类的个数
+cluster_ori_counts = {}
+for i, indices in enumerate(original_indices):
+    cell_types = adata.obs['celltype'][indices]
+    unique_cell_types, cell_type_counts = np.unique(cell_types, return_counts=True)
+    cluster_ori_counts[i+1] = dict(zip(unique_cell_types, cell_type_counts))
+
+# 将数量转换为百分比，并创建数据框用于绘制小提琴图
+data = []
+for cluster_idx, counts in cluster_ori_counts.items():
+    cluster_data = {'Cluster': cluster_idx}
+    total_count = sum(counts.values())
+    for cell_type, count in counts.items():
+        percentage = count / total_count * 100
+        cluster_data[cell_type] = percentage
+    data.append(cluster_data)
+
+# 创建数据框
+df = pd.DataFrame(data)
+
+# 绘制小提琴图
+sns.violinplot(data=df.drop('Cluster', axis=1), inner='quartiles')
+plt.savefig('/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/09.cluster_immune/02.data/violin_plot.celltype.png')
+
+##统计ucell打分
+# 获取每个Cluster_ori内的antiTumor列和hallmarkerEMT列的值
+antiTumor_values = []
+hallmarkerEMT_values = []
+for indices in original_indices:
+    antiTumor_values.extend([adata.obs['antiTumor'][indices]])
+    hallmarkerEMT_values.extend([adata.obs['hallmarkerEMT'][indices]])
+
+# 创建数据框
+df_antiTumor = pd.DataFrame({'Cluster_ori': original_indices, 'antiTumor': antiTumor_values})
+df_hallmarkerEMT = pd.DataFrame({'Cluster_ori': original_indices, 'hallmarkerEMT': hallmarkerEMT_values})
+
+# 绘制antiTumor小提琴图
+plt.figure(figsize=(10, 6))
+sns.violinplot(data=df_antiTumor, x='Cluster_ori', y='antiTumor', inner='quartiles')
+plt.xlabel('Clusters')
+plt.ylabel('antiTumor')
+plt.title('Variation of antiTumor in Cluster_ori')
+plt.savefig('/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/09.cluster_immune/02.data/antiTumor_violin_plot.png')
+
+# 绘制hallmarkerEMT小提琴图
+plt.figure(figsize=(10, 6))
+sns.violinplot(data=df_hallmarkerEMT, x='Cluster_ori', y='hallmarkerEMT', inner='quartiles')
+plt.xlabel('Clusters')
+plt.ylabel('hallmarkerEMT')
+plt.title('Variation of hallmarkerEMT in Cluster_ori')
+plt.savefig('/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/09.cluster_immune/02.data/hallmarkerEMT_violin_plot.png')

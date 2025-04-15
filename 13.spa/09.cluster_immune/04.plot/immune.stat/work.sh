@@ -1,0 +1,2 @@
+perl -e 'open IN0,$ARGV[0];while(<IN0>){chomp;@a=split(/,/);$ha{$a[0]}=1};open IN1,$ARGV[1];while(<IN1>){chomp;@a=split(/\t/);$f="/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/06.cell2location/01.from_hainan/ori_file/h5ad/data/$a[0]"."_cellbin.final.celltype.obs.csv";open IN,$f;$n=0;while(<IN>){chomp;@b=split(/,/);if(exists $ha{$b[-3]}){$n++}};print "$a[1]\t$a[0]\t$n\n"}' immune.list sn.list > immune.list.all.stat &
+

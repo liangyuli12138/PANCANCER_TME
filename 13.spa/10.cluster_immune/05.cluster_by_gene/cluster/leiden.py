@@ -1,0 +1,33 @@
+import harmonypy as hm
+import scanpy as sc
+import os
+import scanpy as sc
+import anndata as ad
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+from scipy.sparse import csr_matrix
+import glob
+from anndata import AnnData
+
+df = pd.read_csv("/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/10.cluster_immune/05.cluster_by_gene/cluster/merge.gene.csv", header=0, index_col=0)
+
+adata = AnnData(df)
+sc.pp.pca(adata, n_comps=50)
+
+meta_data = adata.obs
+data_mat = adata.obsm["X_pca"]
+ho = hm.run_harmony(data_mat, meta_data, "batch")
+adata.obsm["X_harmony"] = ho.Z_corr.T
+
+sc.pp.neighbors(adata,n_neighbors = 15, use_rep = "X_harmony")
+#adata.obs["region_cluster"] = adata.obs["leiden"].astype("category")
+
+sc.tl.leiden(adata, resolution=0.5)
+adata.obs["region_cluster"] = adata.obs["leiden"].astype("category")
+sc.tl.umap(adata, min_dist = 0.1)
+sc.pl.umap(adata, color=['region_cluster'], size=30, color_map = 'RdPu', ncols = 2, legend_loc='on data',legend_fontsize=10)
+plt.savefig("immune.cluster.r0.5.png",dpi=300, bbox_inches='tight')
+adata.obs.to_csv("immune.cluster.r0.5.obs")
+adata.write_h5ad("immune.cluster.r0.5.h5ad")

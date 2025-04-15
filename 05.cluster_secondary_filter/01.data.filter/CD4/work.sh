@@ -1,0 +1,2 @@
+perl -e 'print "cell\n";open IN0,$ARGV[0];while(<IN0>){chomp;@a=split(/,/);if($a[-1]==5 || $a[-1]==6 || $a[-1]==7 || $a[-1]==8 || $a[-1]==11 || $a[-1]==13 || $a[-1]==14  || $a[-1]==17){print "$a[0]\n"}};open IN1,$ARGV[1];while(<IN1>){chomp;@a=split(/,/);if($a[-1]==3){print "$a[0]\n"}};open IN2,$ARGV[2];while(<IN2>){chomp;@a=split(/,/);if($a[-1] eq "0" || $a[-1]==1 || $a[-1]==2 || $a[-1]==5 || $a[-1]==6 || $a[-1]==7){print "$a[0]\n"}}' all.obs CD8.obs C1.obs > CD4.input
+

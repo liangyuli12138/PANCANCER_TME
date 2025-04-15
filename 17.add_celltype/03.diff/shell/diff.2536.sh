@@ -1,0 +1,1 @@
+python /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/05.cluster_secondary/all_diff/findmarker.py /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/17.add_celltype/02.cluster/Myeloid/2000_50_2.5/pancancer.ref.0723.final.Myeloid.umap.h5ad 6 /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/17.add_celltype/03.diff/Myeloid/2000_50_2.5/diff.6.csv

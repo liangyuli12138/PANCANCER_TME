@@ -1,0 +1,2 @@
+/ldfssz1/ST_OCEAN/USER/liaoshangfeng/software/anaconda3/envs/R422/bin/R --slave -f /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancancer/08.filter_by_gene/13.ref_20230604/08.all.h5ad_ref/anndata_0.7/h5ad2rds/donor/DoubletFind.R  "--args /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/01.data/anndata_0.7/h5ad2rds/pancancer.ref.0721.raw.rds Kidney /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/02.DoubletFind/result" 
+

@@ -1,0 +1,2 @@
+perl -e '<>;while(<>){chomp;@a=split(/,/);$ha{$a[-4]}{$a[-5]}{$a[-14]}++;$hb{$a[-14]}=1};for $i(sort {$a cmp $b} keys %hb){print ",$i"};print "\n";for $i(sort {$a cmp $b} keys %ha){for $j(sort {$a cmp $b} keys %{$ha{$i}}){print "$i\t$j";for $k(sort {$a cmp $b} keys %hb){$ha{$i}{$j}{$k}=$ha{$i}{$j}{$k}?$ha{$i}{$j}{$k}:0;print "\t$ha{$i}{$j}{$k}"};print "\n"}}' pancancer.icar.contour.cell.obs > pancancer.icar.contour.cell.stat.xls
+

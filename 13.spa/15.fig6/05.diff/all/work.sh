@@ -1,0 +1,2 @@
+perl -e 'open IN0,$ARGV[0];while(<IN0>){chomp;@a=split;$ha{$a[0]}=$a[1]};open IN2,$ARGV[2];while(<IN2>){chomp;@a=split;$hb{$a[1]}=1};open IN1,$ARGV[1];$t=<IN1>;chomp $t;print "cell,difftype\n";while(<IN1>){chomp;@a=split(/,/);if(($a[-2] eq "Lymphoid_1_2" || $a[-2] eq "Lymphoid3") && exists $hb{$a[-3]}){print "$a[0],$ha{$a[-7]}","_","$a[-2]\n"}else{print "$a[0],other\n"}}' merge.list pancancer.icar.all.cell.obs filter.all.cluster.list > filter.all.cluster.list.at
+

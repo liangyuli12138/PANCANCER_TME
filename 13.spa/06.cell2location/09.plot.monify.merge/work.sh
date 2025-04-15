@@ -1,0 +1,2 @@
+perl -e 'while(<>){chomp;@a=split;$o=`cat CellBin_RCTD_plot.hg.R`;$o=~s/aaaa/$a[1].$a[0]/g;$o=~s/bbbb/$a[0]/g;open OUT,">shell/plot/plot.$a[0].R";print OUT "$o";open OUT,">shell/plot/plot.$a[0].sh";print OUT "/ldfssz1/ST_OCEAN/USER/liaoshangfeng/software/anaconda3/envs/R411/bin/Rscript /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/06.cell2location/09.plot.monify.merge/shell/plot/plot.$a[0].R\n";}' sn.list
+

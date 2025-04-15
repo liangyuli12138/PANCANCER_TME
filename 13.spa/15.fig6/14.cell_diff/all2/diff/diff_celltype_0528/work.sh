@@ -1,0 +1,2 @@
+ls diff.Epithelium_Malig*3.csv|perl -e 'while(<>){chomp;$id=$1 if(/Malig\_(\S+)\_Lym/);open IN,$_;$n=0;<IN>;while(<IN>){chomp;@a=split(/,/);$n++;if($n<=100){$ha{$a[1]}++;$hb{$a[1]}.="$id"."|";$a[-1]=sprintf "%.2f",$a[-1];$hc{$a[1]}.="$a[-1]"."|";$a[3]=sprintf "%.2f",$a[3];$hd{$a[1]}.="$a[3]"."|";}}};for $i(keys %ha){print "$i\t$ha{$i}\t$hb{$i}\t$hd{$i}\t$hc{$i}\n"}' |sort -k 2,2nr|awk '$2>=4' > Epithelium_Malig.stat
+

@@ -1,0 +1,13 @@
+library(Seurat)
+#suppressMessages(library(SeuratWrappers))
+library(patchwork)
+library(dplyr)
+library(spacexr)
+library(viridis)
+
+cellbin_data_file <- paste0('/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/05.cell_correct/result/','B02324E3','/','B02324E3','_cellbin.filter.rds')
+cellbin_data <- readRDS(cellbin_data_file)
+cellbin_data[["percent.mt"]] <- PercentageFeatureSet(cellbin_data, pattern = "^MT-")
+data <- subset(cellbin_data, subset = nFeature_Spatial>100 & percent.mt < 15 & nFeature_Spatial<3000 & area>0 & area<2500)
+filter_list <- paste0('/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/05.cell_correct/result/','B02324E3','/','B02324E3','_cellbin.filter.gene.list')
+write.csv(data@meta.data,filter_list)

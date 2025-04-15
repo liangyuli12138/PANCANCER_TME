@@ -1,0 +1,32 @@
+import os
+import datetime
+import json
+import argparse
+
+import anndata
+import scanpy as sc
+import pandas as pd
+
+os.chdir("/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/10.cluster_immune/06.more_celltype_cluster/07.gene/plot")
+
+adata = sc.read_h5ad("/zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/10.cluster_immune/06.more_celltype_cluster/07.gene/merge_25chip_immune_area.nor.h5ad")
+
+sc.pp.scale(adata, max_value=10)
+
+marker_genes_dict = {
+'Lymphoid0':['MS4A1','BANK1','IGHM','CD3D','TRAC','GZMA','CCL5','YBX3','TCL1A','IGHD','IL4R','FCER2','CD79A','GPR183','BCL2A1','CRIP1','CCR7','TCF7','SELL','LEF1','IL7R',
+'DUSP4','CTLA4','TNFRSF9','RBPJ','RGS1','PDCD1','TIGIT','CD82', 'CXCL13','LAG3','GZMA','GZMH','NKG7','FOXP3','IL2RA','CCL5'],
+'Lymphoid1':['MS4A1','BANK1','IGHM','CD3D','TRAC','GZMA','CCL5','YBX3','TCL1A','IGHD','IL4R','FCER2','CD79A','GPR183','BCL2A1','CRIP1','CCR7','TCF7','SELL','LEF1','IL7R',
+'DUSP4','CTLA4','TNFRSF9','RBPJ','RGS1','PDCD1','TIGIT','CD82', 'CXCL13','LAG3','GZMA','GZMH','NKG7','FOXP3','IL2RA','CCL5'],
+'Lymphoid2':['MS4A1','BANK1','IGHM','CD3D','TRAC','GZMA','CCL5','YBX3','TCL1A','IGHD','IL4R','FCER2','CD79A','GPR183','BCL2A1','CRIP1','CCR7','TCF7','SELL','LEF1','IL7R',
+'DUSP4','CTLA4','TNFRSF9','RBPJ','RGS1','PDCD1','TIGIT','CD82', 'CXCL13','LAG3','GZMA','GZMH','NKG7','FOXP3','IL2RA','CCL5'],
+'Lymphoid3':['MS4A1','BANK1','IGHM','CD3D','TRAC','GZMA','CCL5','YBX3','TCL1A','IGHD','IL4R','FCER2','CD79A','GPR183','BCL2A1','CRIP1','CCR7','TCF7','SELL','LEF1','IL7R',
+'DUSP4','CTLA4','TNFRSF9','RBPJ','RGS1','PDCD1','TIGIT','CD82', 'CXCL13','LAG3','GZMA','GZMH','NKG7','FOXP3','IL2RA','CCL5'],
+'Myeloid4':['LYZ','C1QB','LST1','S100A8','S100A9','SLC11A1','SERPINA1','FCN1','CLEC9A','CD1C','C1QC','C1QB','APOC1','SPP1','CCL4','CCL3L1','CXCR4','LYVE1','FOLR2', 'STAB1','F13A1'],
+'Myeloid5':['LYZ','C1QB','LST1','S100A8','S100A9','SLC11A1','SERPINA1','FCN1','CLEC9A','CD1C','C1QC','C1QB','APOC1','SPP1','CCL4','CCL3L1','CXCR4','LYVE1','FOLR2', 'STAB1','F13A1'],
+'Myeloid6':['LYZ','C1QB','LST1','S100A8','S100A9','SLC11A1','SERPINA1','FCN1','CLEC9A','CD1C','C1QC','C1QB','APOC1','SPP1','CCL4','CCL3L1','CXCR4','LYVE1','FOLR2', 'STAB1','F13A1'],
+'Myeloid7':['LYZ','C1QB','LST1','S100A8','S100A9','SLC11A1','SERPINA1','FCN1','CLEC9A','CD1C','C1QC','C1QB','APOC1','SPP1','CCL4','CCL3L1','CXCR4','LYVE1','FOLR2', 'STAB1','F13A1'],
+'Myeloid8':['LYZ','C1QB','LST1','S100A8','S100A9','SLC11A1','SERPINA1','FCN1','CLEC9A','CD1C','C1QC','C1QB','APOC1','SPP1','CCL4','CCL3L1','CXCR4','LYVE1','FOLR2', 'STAB1','F13A1']
+}
+
+

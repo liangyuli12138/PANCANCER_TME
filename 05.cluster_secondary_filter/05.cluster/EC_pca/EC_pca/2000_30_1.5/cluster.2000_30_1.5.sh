@@ -1,0 +1,1 @@
+/jdfssz1/ST_TSCBI/P22Z10200N0433/USER/zhangzhao/software/anaconda3/bin/python /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/05.cluster_secondary_filter/05.cluster/EC_pca/EC_pca/2000_30_1.5/cluster.2000_30_1.5.py

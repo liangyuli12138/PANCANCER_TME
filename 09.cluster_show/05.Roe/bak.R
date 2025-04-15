@@ -1,0 +1,1 @@
+pheatmap(dat,border_color = "grey",cluster_rows=F,cluster_cols=F,width=8,height=10,display_numbers=matrix(as.matrix(read.csv("Roe.out.matrix.symbol",header = TRUE, row.names=1, sep = "\t")),nrow=nrow(dat)),color = colorRampPalette(c("#FEE6CE", "#FDC08C", "#F5904B", "#E6550D"))(4))

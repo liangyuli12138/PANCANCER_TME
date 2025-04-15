@@ -1,0 +1,12 @@
+.libPaths("/ldfssz1/ST_OCEAN/USER/liaoshangfeng/software/anaconda3/envs/R411/lib/R/library/")
+#suppressMessages(library(SingleCellExperiment,lib.loc="/ldfssz1/ST_OCEAN/USER/liaoshangfeng/software/anaconda3/envs/R4/lib/R/library"))
+#suppressMessages(library(monocle3))
+suppressMessages(library(Seurat))
+#suppressMessages(library(SeuratWrappers))
+suppressMessages(library(patchwork))
+suppressMessages(library(ggplot2))
+suppressMessages(library(dplyr))
+suppressMessages(library(spacexr))
+library(viridis)
+library(ggdark)
+

@@ -1,0 +1,1 @@
+python /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/15.fig6/02.diff/findmarker.py /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/15.fig6/02.diff/pancancer.icar.all.cell.h5ad Lymphoid_1_2 /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/15.fig6/02.diff/diff/diff.Lymphoid_1_2.csv

@@ -1,0 +1,1 @@
+perl /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/06.cell2location/04.plot.monify/get.loc.pl /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/06.cell2location/04.plot.monify/cell.monify/D01872C4.img > /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/06.cell2location/04.plot.monify/cell.monify/D01872C4.img.loc

@@ -1,0 +1,2 @@
+source /jdfssz1/ST_TSCBI/P22Z10200N0433/USER/liujzh/library/Miniconda3/bin/activate R_env
+/jdfssz1/ST_TSCBI/P22Z10200N0433/USER/liujzh/library/Miniconda3/envs/R_env/bin/Rscript /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/15.fig6/01.data/h5ad2rds/convert.R /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/13.spa/15.fig6/01.data/h5ad2rds/pancancer.icar.all.cell.h5ad anndata seurat pancancer.icar.all.cell

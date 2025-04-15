@@ -1,0 +1,1 @@
+perl /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/12.spa/01.background_gene/stat.bg.pl /jdfssz1/ST_TSCBI/P22Z10200N0433/USER/wubin2/project/pancancer/09.spatial/00.data_0517/B01317E6_web_1/B01317E6.cellbin.gef.gem > /zfssz2/ST_TSCBI/P22Z10200N0433/USER/wubin2/wubin2/pancnew/12.spa/01.background_gene/filter.gem/B01317E6.cellbin.gef.gem.filter
