@@ -37,6 +37,7 @@ All paths below are shown as **relative project paths** and start directly from 
 
 # 1. Core Data Resources
 
+**All Data havehave been deposited in the OMIX, China National Center for Bioinformation / Beijing Institute of Genomics, Chinese Academy of Sciences (https://ngdc.cncb.ac.cn/omix: accession no. OMIX006904).**
 ## Single-cell data
 
 ### Single-cell expression matrix list
