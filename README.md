@@ -1,4 +1,4 @@
-# Pan-Cancer Project Analysis Handover
+# Pan-Cancer Project Analysis Readme
 
 This repository documents the key datasets, analysis workflows, scripts, and output files used in the pan-cancer single-cell and spatial transcriptomics project.
 
